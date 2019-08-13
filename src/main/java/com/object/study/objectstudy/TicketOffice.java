@@ -7,9 +7,18 @@ import java.util.List;
 public class TicketOffice {
     private Long amount;
     private List<Ticket> tickets = new ArrayList<>();
+    private Theater theater;
 
     public TicketOffice(Long amount) {
         this.amount = amount;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
+
+    public Theater getTheater() {
+        return this.theater;
     }
 
     public void addTicket(Ticket ticket) {
