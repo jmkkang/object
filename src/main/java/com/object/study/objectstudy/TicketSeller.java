@@ -1,6 +1,9 @@
 package com.object.study.objectstudy;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketSeller {
     private TicketOffice ticketOffice;
 
@@ -9,21 +12,32 @@ public class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    //갑은 셀러다..
+    //갑은 셀러다
     //트랜잭션에서는 객체와 주체를 잘 파악해야한다.
     public Ticket getTicket(Audience audience) {
         Ticket ticket = Ticket.EMPTY;
-        if (audience.getInvitation() != Invitation.EMPTY) {
-            ticket = ticketOffice.getTicketWithNoFee();
-            if (ticket != Ticket.EMPTY) audience.removeInvitation();
-        }else{
-            Long price = ticketOffice.getTicketPrice();
-            if(price > 0 && audience.hasAmount(price)){
-                ticket = ticketOffice.getTicketWithFee();
-                if(ticket != Ticket.EMPTY) audience.minusAmount(price);
-            }
+        List<Movie> movies = new ArrayList<>();
+
+        for (Movie movie : audience.getMovies()) {
+            if (movie != Movie.EMPTY) movies.add(movie);
         }
 
+        if (movies.size() != 0) {
+
+            Invitation invitation = audience.getInvitation();
+            if (invitation != Invitation.EMPTY || invitation.getTheater()!= ) {
+
+
+                ticket = ticketOffice.getTicketWithNoFee();
+                if (ticket != Ticket.EMPTY) audience.removeInvitation();
+            } else {
+                Long price = ticketOffice.getTicketPrice();
+                if (price > 0 && audience.hasAmount(price)) {
+                    ticket = ticketOffice.getTicketWithFee();
+                    if (ticket != Ticket.EMPTY) audience.minusAmount(price);
+                }
+            }
+        }
         return ticket;
 
     }

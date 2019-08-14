@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TicketOffice {
+public class TicketOffice extends Theater {
     private Long amount;
     private List<Ticket> tickets = new ArrayList<>();
     private Theater theater;
 
-    public TicketOffice(Long amount) {
+    public TicketOffice(Theater theater, Long amount) {
+        this.theater = theater;
+        this.theater.setTicketOffices(this);
         this.amount = amount;
     }
 
@@ -46,4 +48,6 @@ public class TicketOffice {
         if (tickets.size() == 0) return 0L;
         else return tickets.get(0).getFee();
     }
+
+
 }
