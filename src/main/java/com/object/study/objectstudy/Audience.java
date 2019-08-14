@@ -1,17 +1,23 @@
 package com.object.study.objectstudy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Audience {
     private Ticket ticket = Ticket.EMPTY;
     private Invitation invitation = Invitation.EMPTY;
     private Long amount;
-    private Movie movie;
+    private List<Movie> movies = new ArrayList<>();
 
     public Audience(Long amount) {
         this.amount = amount;
     }
 
     public void buyTicket(TicketSeller seller) {
-        ticket = seller.getTicket(this);
+        if (this.movies.size() != 0) {
+            ticket = seller.getTicket(this);
+        }
     }
 
     public boolean hasAmount(Long amount) {
@@ -40,11 +46,11 @@ public class Audience {
         this.invitation = invitation;
     }
 
-    public void setMovie(Movie movie){
-        this.movie = movie;
+    public void setMovies(Movie... movies) {
+        this.movies.addAll(Arrays.asList(movies));
     }
 
-    public Movie getMovie(){
-        return movie;
+    public List<Movie> getMovies() {
+        return this.movies;
     }
 }

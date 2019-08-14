@@ -1,14 +1,16 @@
 package com.object.study.objectstudy;
 
 public class Ticket {
-    final static public Ticket EMPTY = new Ticket(null, null);
+    final static public Ticket EMPTY = new Ticket(null, null, null);
     final private Theater theater;
     final private Movie movie;
     private boolean isEntered = false;
+    final private Long fee;
 
-    public Ticket(Theater theater, Movie movie) {
+    public Ticket(Theater theater, Movie movie, Long fee) {
         this.theater = theater;
         this.movie = movie;
+        this.fee = fee;
     }
 
     public boolean isValid(Theater theater) {
@@ -26,8 +28,7 @@ public class Ticket {
         }
     }
 
-    //this.fee 에 적재하지않고 참조하도록.
     public Long getFee() {
-        return this.movie.getFee();
+        return this.fee;
     }
 }
