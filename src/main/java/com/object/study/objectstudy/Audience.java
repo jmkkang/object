@@ -4,6 +4,7 @@ public class Audience {
     private Ticket ticket = Ticket.EMPTY;
     private Invitation invitation = Invitation.EMPTY;
     private Long amount;
+    private Movie movie;
 
     public Audience(Long amount) {
         this.amount = amount;
@@ -37,5 +38,13 @@ public class Audience {
 
     public void setInvitation(Invitation invitation) {
         this.invitation = invitation;
+    }
+
+    public void setMovie(Movie movie){
+        this.movie = movie;
+    }
+
+    public Movie getMovie(){
+        return movie;
     }
 }

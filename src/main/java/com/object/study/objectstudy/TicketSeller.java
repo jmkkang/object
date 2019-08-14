@@ -9,10 +9,12 @@ public class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    //갑은 셀러다..
+    //갑은 셀러다
     //트랜잭션에서는 객체와 주체를 잘 파악해야한다.
     public Ticket getTicket(Audience audience) {
         Ticket ticket = Ticket.EMPTY;
+        if (audience.getMovie() == Movie.EMPTY) {
+        }
         if (audience.getInvitation() != Invitation.EMPTY) {
             ticket = ticketOffice.getTicketWithNoFee();
             if (ticket != Ticket.EMPTY) audience.removeInvitation();

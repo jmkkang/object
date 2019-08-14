@@ -12,14 +12,28 @@ public class ObjectStudyApplication {
         Audience audience1 = new Audience(0L);
         Audience audience2 = new Audience(50L);
 
-        TicketOffice ticketOffice = new TicketOffice(0L);
+        Movie movie1 = new Movie("곡성");
+        Movie movie2 = new Movie("엑시트");
+
+        movie1.setFee(30L);
+        movie2.setFee(90L);
+
+        theater.setMovies(movie1);
+        theater.setMovies(movie2);
+
+        TicketOffice ticketOffice = new TicketOffice(theater, 0L);
         TicketSeller ticketSeller = new TicketSeller();
 
         theater.setTicketOffices(ticketOffice);
-        theater.setTicket(ticketOffice, 10L);
+        theater.setTicket(ticketOffice, movie1, 10L);
+        theater.setTicket(ticketOffice, movie2, 40L);
+
         theater.setInvitation(audience1);
 
         ticketSeller.setTicketOffice(ticketOffice);
+
+        audience1.setMovie(movie2);
+        audience2.setMovie(movie1);
         audience1.buyTicket(ticketSeller);
         audience2.buyTicket(ticketSeller);
 

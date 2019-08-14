@@ -1,6 +1,8 @@
 package com.object.study.objectstudy;
 
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +11,7 @@ public class Theater {
 
     final private List<TicketOffice> ticketOffices = new ArrayList<>();
     final private Long fee;
+    final private List<Movie> movies = new ArrayList<>();
 
     public Theater(Long fee) {
         this.fee = fee;
@@ -24,15 +27,19 @@ public class Theater {
     }
 
     //극장이 특정 매표소에게 티켓을 배포, 해당 극장에서 배포된 티켓이라는 것이 중요.
-    public void setTicket(TicketOffice ticketOffice, Long num) {
-        if (!ticketOffices.contains(ticketOffice)) return;
+    public void setTicket(TicketOffice ticketOffice, Movie movie, Long num) {
+        if (!ticketOffices.contains(ticketOffice) || !this.movies.contains(movie)) return;
         while (num-- > 0) {
-            ticketOffice.addTicket(new Ticket(this));
+            ticketOffice.addTicket(new Ticket(this, movie));
         }
     }
 
     public void setInvitation(Audience audience) {
         audience.setInvitation(new Invitation(this));
+    }
+
+    public void setMovies(Movie... movies) {
+        this.movies.addAll(Arrays.asList(movies));
     }
 
     public boolean enter(Audience audience) {
