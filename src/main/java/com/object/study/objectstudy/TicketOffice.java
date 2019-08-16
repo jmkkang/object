@@ -64,8 +64,6 @@ public class TicketOffice extends Theater {
         else return ticket;
     }
 
-    //정보의 은닉 / 상호참조 x/ 단방향의존성
-    //ticketoffice는 시어터를 참조하지않음. 시어터의 getFee를 못하니 티켓으로부터 가격을 가져옴
     public Long getTicketPrice(Movie movie) {
         int index = getMinPriceTicketIndexByMovie(movie);
         Ticket ticket = this.tickets.get(index);

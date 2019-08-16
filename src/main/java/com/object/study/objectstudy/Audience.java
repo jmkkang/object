@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Audience {
     private List<Ticket> tickets = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
     private Invitation invitation = Invitation.EMPTY;
     private Long amount;
-    private List<Movie> movies = new ArrayList<>();
 
     public Audience(Long amount) {
         this.amount = amount;
@@ -55,5 +55,9 @@ public class Audience {
 
     public Long getAmount() {
         return this.amount;
+    }
+
+    public boolean hasInvitationOfMovie(Movie movie) {
+        return this.invitation.hasMovie(movie);
     }
 }

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class TicketSeller {
     private TicketOffice ticketOffice;
 
-    //생성자에서 받아버리면 종신계약.. 변경될거라는 판단하에 setter
     public void setTicketOffice(TicketOffice ticketOffice) {
         this.ticketOffice = ticketOffice;
     }
@@ -24,7 +23,6 @@ public class TicketSeller {
                 .collect(Collectors.toList());
 
         if (movies.size() == 0) {
-            System.out.println("선택된 영화가 없음" + audience);
             return tickets;
         }
 
@@ -32,8 +30,7 @@ public class TicketSeller {
         for (Movie movie : movies) {
             Ticket ticket = Ticket.EMPTY;
 
-            Invitation invitation = audience.getInvitation();
-            if (audience.getInvitation() != Invitation.EMPTY || invitation.hasMovie(movie)) {
+            if (isNoFee(audience, movie)) {
                 ticket = ticketOffice.getTicketWithNoFee(movie);
                 if (ticket != Ticket.EMPTY) audience.removeInvitation();
             } else {
@@ -50,5 +47,9 @@ public class TicketSeller {
         }
 
         return tickets;
+    }
+
+    public boolean isNoFee(Audience audience, Movie movie) {
+        return audience.getInvitation() != Invitation.EMPTY || audience.hasInvitationOfMovie(movie);
     }
 }

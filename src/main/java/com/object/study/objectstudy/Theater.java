@@ -48,4 +48,8 @@ public class Theater {
 
         return true;
     }
+
+    public boolean hasMovie(Movie movie) {
+        return this.movies.contains(movie);
+    }
 }
