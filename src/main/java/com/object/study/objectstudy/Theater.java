@@ -1,7 +1,6 @@
 package com.object.study.objectstudy;
 
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +35,17 @@ public class Theater {
         this.movies.addAll(Arrays.asList(movies));
     }
 
+    public List<Movie> getMovies() {
+        return this.movies;
+    }
+
     public boolean enter(Audience audience) {
-        Ticket ticket = audience.getTicket();
-        return ticket.isValid(this);
+        List<Ticket> tickets = audience.getTicket();
+
+        for (Ticket ticket : tickets) {
+            if (!ticket.isValid(this)) return false;
+        }
+
+        return true;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Audience {
-    private Ticket ticket = Ticket.EMPTY;
+    private List<Ticket> tickets = new ArrayList<>();
     private Invitation invitation = Invitation.EMPTY;
     private Long amount;
     private List<Movie> movies = new ArrayList<>();
@@ -15,9 +15,8 @@ public class Audience {
     }
 
     public void buyTicket(TicketSeller seller) {
-        if (this.movies.size() != 0) {
-            ticket = seller.getTicket(this);
-        }
+
+        tickets = seller.getTicket(this);
     }
 
     public boolean hasAmount(Long amount) {
@@ -38,8 +37,8 @@ public class Audience {
         invitation = Invitation.EMPTY;
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public List<Ticket> getTicket() {
+        return tickets;
     }
 
     public void setInvitation(Invitation invitation) {
@@ -52,5 +51,9 @@ public class Audience {
 
     public List<Movie> getMovies() {
         return this.movies;
+    }
+
+    public Long getAmount() {
+        return this.amount;
     }
 }
